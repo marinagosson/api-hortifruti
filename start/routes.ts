@@ -30,11 +30,13 @@ Route.get('/', async () => {
 Route.post('/users',async ({request, response}: HttpContextContract) => {
   const email = request.input('email')
   const password = request.input('password')
+  const type = request.input('type')
   if(email == null) return response.badRequest({"success": false, "message": "Campo e-mail não informado", "data": null})
   if(password == null) return response.badRequest({"success": false, "message": "Campo password não informado", "data": null})
   const createdUser = await User.create({
     email: email,
-    password: password
+    password: password,
+    type: type
   })
   return response.ok({"success": true, "message": "Usuário criado com sucesso", "data": createdUser.toJSON()})
 })
