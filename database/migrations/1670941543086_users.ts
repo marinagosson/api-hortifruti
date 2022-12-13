@@ -14,9 +14,9 @@ export default class extends BaseSchema {
       table.increments(this.tableFieldId).primary()
       table.string(this.tableFieldEmail, 255).notNullable().unique()
       table.string(this.tableFieldPassword, 180).notNullable()
-      table.string(this.tableFieldRememberMeToken).nullable()
+      table.string(this.tableFieldRememberMeToken).notNullable().defaultTo(false)
+      table.string(this.tableFieldType, 20).notNullable().defaultTo('client')
       table.timestamps(true, true)
-      table.string(this.tableFieldType, 20).nullable()
     })
   }
 
