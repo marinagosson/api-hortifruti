@@ -16,6 +16,7 @@ Route.group(() => {
   Route.get("/addresses", "AddressesController.list")
   Route.post("/address", "AddressesController.create")
   Route.delete("/address/:id", "AddressesController.delete")
+  Route.put("/address/:id", "AddressesController.update")
 }).middleware("auth");
 
 Route.get('/', async () => {

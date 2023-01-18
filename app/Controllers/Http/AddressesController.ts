@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Address from 'App/Models/Address'
 import Client from 'App/Models/Client'
-import CreateAddressValidator from 'App/Validators/CreateAddressValidator'
+import CreateOrUpdateAddressValidator from 'App/Validators/CreateAddressValidator'
 
 export default class AddressesController {
 
@@ -36,7 +36,7 @@ export default class AddressesController {
     }
 
     public async create({auth, request, response}: HttpContextContract){
-        const payload = await request.validate(CreateAddressValidator)
+        const payload = await request.validate(CreateOrUpdateAddressValidator)
         const userAuthenticated = await auth.use('api').authenticate()
         const client = await Client.findByOrFail('user_id', userAuthenticated.id)
 
@@ -55,6 +55,20 @@ export default class AddressesController {
             success: true,
             data: addressCreated
         })
+    }
+
+    public async update({request, response, params}: HttpContextContract){
+        const payload = await request.validate(CreateOrUpdateAddressValidator);
+        const address = await Address.findOrFail(params.id);
+
+        address.merge(payload);
+        await address.save();
+
+        return response.ok({
+            message: 'Address updated with success',
+            success: true,
+            data: address
+        });
     }
 
     public async delete({response, params}: HttpContextContract){
