@@ -1,28 +1,43 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import City from './City'
+import Client from './Client'
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public street: String
+  public street: string
 
   @column()
-  public number: String | null
+  public number: string | null
 
   @column()
-  public referencePoint: String
+  public clientId: number;
 
   @column()
-  public complement: String | null
+  public cityId: number;
 
   @column()
-  public neighborhood: String | null
+  public referencePoint: string | null
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  @column()
+  public complement: string | null
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  @column()
+  public neighborhood: string | null
+
+  @hasOne(() => City, {
+    localKey: 'cityId',
+    foreignKey: 'id'
+  })
+
+  public city: HasOne<typeof City>
+
+  @hasOne(() => Client, {
+    localKey: 'clientId',
+    foreignKey: 'id'
+  })
+
+  public client: HasOne<typeof Client>
 }

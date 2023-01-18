@@ -13,6 +13,9 @@ Route.group(() => {
   Route.get("/cities-has-establishment", "CitiesController.listAllHasEstablisment")
   Route.get("/establishments", "EstablishmentsController.list")
   Route.get("/city/:id/establishments", "CitiesController.listEstablishmentFromCity")
+  Route.get("/addresses", "AddressesController.list")
+  Route.post("/address", "AddressesController.create")
+  Route.delete("/address/:id", "AddressesController.delete")
 }).middleware("auth");
 
 Route.get('/', async () => {
