@@ -8,6 +8,11 @@ Route.group(() => {
   Route.get("/users", "UsersController.users")
   Route.post("/client", "ClientsController.create")
   Route.put("/client", "ClientsController.update")
+  Route.get("/cities", "CitiesController.list")
+  Route.post("/city", "CitiesController.create")
+  Route.get("/cities-has-establishment", "CitiesController.listAllHasEstablisment")
+  Route.get("/establishments", "EstablishmentsController.list")
+  Route.get("/city/:id/establishments", "CitiesController.listEstablishmentFromCity")
 }).middleware("auth");
 
 Route.get('/', async () => {

@@ -3,7 +3,6 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import Admin from 'App/Models/Admin';
 import Client from 'App/Models/Client';
 import Establishment from 'App/Models/Establishment';
-import User from 'App/Models/User';
 
 export default class UsersController {
 
@@ -45,7 +44,7 @@ export default class UsersController {
         return response.ok(data);
     }
 
-    public async users({auth, request, response}) {
+    public async users({auth, response}) {
         const userAuthenticated = await auth.use("api").authenticate();
         let data;
         switch(userAuthenticated.type) {
