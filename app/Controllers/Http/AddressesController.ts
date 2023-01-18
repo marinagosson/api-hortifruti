@@ -22,9 +22,9 @@ export default class AddressesController {
         const getClient = await Client.query()
         .where('id', client.id)
         .preload('addresses', (CityQuery) => {
-            CityQuery.preload('city'), (StateQuery) => {
-                StateQuery.preload('state')
-            }
+            CityQuery.preload('city', (StateQuery) => {
+                StateQuery.preload('state')  
+            })
          }).firstOrFail()
 
          return response.ok({

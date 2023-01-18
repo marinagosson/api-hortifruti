@@ -1,6 +1,5 @@
 import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import City from './City'
-import Client from './Client'
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
@@ -33,11 +32,4 @@ export default class Address extends BaseModel {
   })
 
   public city: HasOne<typeof City>
-
-  @hasOne(() => Client, {
-    localKey: 'clientId',
-    foreignKey: 'id'
-  })
-
-  public client: HasOne<typeof Client>
 }

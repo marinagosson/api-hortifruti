@@ -19,7 +19,6 @@ export default class City extends BaseModel {
     foreignKey: 'id',
     localKey: 'state_id',
   })
-
   public state: HasOne<typeof State>
 
   @manyToMany(() => Establishment, {
